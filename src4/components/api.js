@@ -30,7 +30,7 @@ export class api extends Component {
         uri: 'https://static.thenounproject.com/png/1560819-200.png',
       },
       token: '',
-      modalEdit: true,
+      modalEdit: false,
       photo: '',
       editId: null,
       editTask: '',
@@ -72,7 +72,7 @@ export class api extends Component {
           if (response) console.log('Upload succes.', response);
           alert('Data ditambahkan!');
           this.getTodos();
-          this.editData();
+          this.modalEdit();
         })
         .catch((error) => {
           console.log('Upload error', error);
