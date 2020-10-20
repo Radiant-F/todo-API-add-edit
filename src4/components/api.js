@@ -72,7 +72,6 @@ export class api extends Component {
           if (response) console.log('Upload succes.', response);
           alert('Data ditambahkan!');
           this.getTodos();
-          this.modalEdit();
         })
         .catch((error) => {
           console.log('Upload error', error);
@@ -215,7 +214,7 @@ export class api extends Component {
             console.log(response);
             if (response.status == 'success') {
               console.log('upload succes', response);
-              alert('Data dirumbah!');
+              alert('Data dirubah!');
               this.getTodos();
               this.modalEdit(false);
             } else {
