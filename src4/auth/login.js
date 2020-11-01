@@ -50,36 +50,40 @@ export default class Login extends Component {
   };
 
   Login = () => {
-    const {email, password} = this.state;
-    var kirimData = {email: email, password: password, mobile: true};
-    var formBody = [];
-    for (var key in kirimData) {
-      var encodedKey = encodeURIComponent(key);
-      var encodedValue = encodeURIComponent(kirimData[key]);
-      formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join('&');
-    fetch('http://restful-api-laravel-7.herokuapp.com/api/login', {
-      method: 'POST',
-      body: formBody,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        console.log(responseJSON);
-        const {token} = responseJSON;
-        if (token) {
-          AsyncStorage.setItem('token', token);
-          this.props.navigation.navigate('API');
-        } else {
-          alert('Make sure your data is correct.');
-        }
+    if (this.state.email != '' && this.state.password != '') {
+      const {email, password} = this.state;
+      var kirimData = {email: email, password: password, mobile: true};
+      var formBody = [];
+      for (var key in kirimData) {
+        var encodedKey = encodeURIComponent(key);
+        var encodedValue = encodeURIComponent(kirimData[key]);
+        formBody.push(encodedKey + '=' + encodedValue);
+      }
+      formBody = formBody.join('&');
+      fetch('http://restful-api-laravel-7.herokuapp.com/api/login', {
+        method: 'POST',
+        body: formBody,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
       })
-      .catch((err) => {
-        alert('Something went wrong..');
-      });
+        .then((response) => response.json())
+        .then((responseJSON) => {
+          console.log(responseJSON);
+          const {token} = responseJSON;
+          if (token) {
+            AsyncStorage.setItem('token', token);
+            this.props.navigation.navigate('API');
+          } else {
+            alert('Make sure your data is correct.');
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else {
+      alert('Harap diisi.');
+    }
   };
 
   render() {

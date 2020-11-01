@@ -163,14 +163,6 @@ export class api extends Component {
     });
   };
 
-  // editData(data = null){
-  //   if(data !== null) {
-  //     this.setState({
-
-  //     })
-  //   }
-  // }
-
   render() {
     console.log(this.state.photo);
     return (
